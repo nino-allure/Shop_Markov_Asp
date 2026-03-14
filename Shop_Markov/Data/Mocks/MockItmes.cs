@@ -12,7 +12,7 @@ namespace Shop_Markov.Data.Mocks
         {
             get
             {
-                return new List<Items>()
+                List<Items> items = new List<Items>()
                 {
                     new Items() {
                         Id = 0,
@@ -55,6 +55,8 @@ namespace Shop_Markov.Data.Mocks
                         Category = _category.AllCategories.Where(x => x.Id == 0).First()
                     }
                 };
+
+                return items;
             }
         }
     }

@@ -8,10 +8,9 @@ namespace Shop_Markov.Controllers
         private IItems IAllItems;
         private ICategories IAllCategories;
 
-        public ItemsController(IItems iAllItems, ICategories iAllCategories)
-        {
-            this.IAllItems = IAllItems;
-            this.IAllCategories = IAllCategories;
+        public ItemsController(IItems iAllItems, ICategories iAllCategories) {
+            this.IAllItems = iAllItems;
+            this.IAllCategories = iAllCategories;
         }
 
         public ViewResult List()

@@ -10,6 +10,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.9" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.3.9" />
+    <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.85" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>

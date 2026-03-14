@@ -8,7 +8,7 @@ namespace Shop_Markov.Data.Mocks
     public class MockItmes : IItems
     {
         public ICategories _category = new MockCategories();
-        public Enumerable<Items> AllItems
+        public IEnumerable<Items> AllItems
         {
             get
             {

@@ -7,7 +7,7 @@ namespace Shop_Markov.Data.Mocks
 {
     public class MockCategories : ICategories
     {
-        public IEnumerable<Categories> AllCategory
+        public IEnumerable<Categories> AllCategories
         {
             get
             {

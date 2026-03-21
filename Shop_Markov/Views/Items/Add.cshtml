@@ -17,7 +17,7 @@
 
 	<div>
 		<label for="file">Изображение</label>
-		<br /><input name="file"/>
+		<br /><input name="files" type="file"/>
 	</div>
 
 	<div>
@@ -27,7 +27,7 @@
 
 	<div>
 		Категория:
-		<br /><select name="idCategory">
+		<br /><select name="CategoryId">
 			@{
 				foreach (var Category in Model)
 				{

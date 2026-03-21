@@ -1,0 +1,66 @@
+﻿@using Shop_Markov.Data.Mocks.Models
+@using Shop_Markov.Data.Models
+@model Items
+@{
+    Layout = "_Layout";
+}
+
+<form method="post" enctype="multipart/form-data" asp-action="Change">
+    <!-- Скрытое поле для ID -->
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <div>
+        Наименование:
+        <br /><input name="name" placeholder="Наименование:" value="@Model.Name" />
+    </div>
+
+    <div>
+        Описание:
+        <br /><input name="description" placeholder="Описание:" value="@Model.Description" />
+    </div>
+
+    <div>
+        <label for="file">Изображение</label>
+        <br /><input name="files" type="file" />
+        @if (!string.IsNullOrEmpty(Model.Img))
+        {
+            <div>Текущее изображение: @Model.Img</div>
+            <div><img src="/img/@Model.Img" alt="@Model.Name" style="max-width: 100px;" /></div>
+        }
+    </div>
+
+    <div>
+        Стоимость:
+        <br /><input name="price" value="@Model.Price" />
+    </div>
+
+    <div>
+        Категория:
+        <br /><select name="CategoryId">
+            @{
+                if (ViewBag.Categories != null)
+                {
+                    foreach (var Category in ViewBag.Categories)
+                    {
+                        if (Category.Id == Model.Category.Id)
+                        {
+                            <option value="@Category.Id" selected>@Category.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@Category.Id">@Category.Name</option>
+                        }
+                    }
+                }
+            }
+        </select>
+    </div>
+
+    <input type="submit" value="Обновить" />
+    <a href="/Items/List">Отмена</a>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <div style="color: red; margin-top: 10px;">@ViewBag.Error</div>
+}

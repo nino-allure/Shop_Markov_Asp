@@ -5,9 +5,9 @@ namespace Shop_Markov.Common
 {
     public class Connection
     {
-        readonly static string ConnectionData = "Server=localhost;Database=Shop;Uid=root;Pwd=;";
+        readonly static string ConnectionData = "Server=127.0.0.1;port=3306;Database=Shop;Uid=root;Pwd=;";
 
-        public MySqlConnection MySqlOpen()
+        public static MySqlConnection MySqlOpen()
         {
             MySqlConnection NewMySqlConnection = new MySqlConnection(ConnectionData);
             NewMySqlConnection.Open();

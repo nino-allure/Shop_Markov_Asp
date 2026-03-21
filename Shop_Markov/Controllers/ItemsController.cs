@@ -16,7 +16,7 @@ namespace Shop_Markov.Controllers
         private ICategories IAllCategories;
         VMItems VMItems = new VMItems();
 
-        public ItemsController(IItems iAllItems, ICategories iAllCategories, IWebHostEnvironment environment)
+        public ItemsController(IItems iAllItems, ICategories iAllCategories, IWebHostEnvironment environment) 
         {
             this.IAllItems = iAllItems;
             this.IAllCategories = iAllCategories;
@@ -29,25 +29,25 @@ namespace Shop_Markov.Controllers
             IEnumerable<Categories> Categories = IAllCategories.AllCategories;
             return View(Categories);
         }
-
+        
         [HttpPost]
         public RedirectResult Add(string name, string description, IFormFile files, float price, int CategoryId)
         {
             string fileName = null;
-
+            
             if (files != null && files.Length > 0)
             {
                 fileName = files.FileName;
                 var uploads = Path.Combine(hostingEnvironment.WebRootPath, "img");
-
+                
                 // Создаем папку если её нет
                 if (!Directory.Exists(uploads))
                 {
                     Directory.CreateDirectory(uploads);
                 }
-
+                
                 var filePath = Path.Combine(uploads, fileName);
-
+                
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     files.CopyTo(fileStream);
@@ -63,39 +63,39 @@ namespace Shop_Markov.Controllers
             int id = IAllItems.Add(newItems);
             return Redirect("/Items/Change?id=" + id);
         }
-
+        
         // GET: /Items/Change
         [HttpGet]
         public IActionResult Change(int id)
         {
             Items item = IAllItems.GetItemById(id);
-
+            
             if (item == null)
             {
                 return NotFound();
             }
-
+            
             ViewBag.Categories = IAllCategories.AllCategories;
             return View(item);
         }
-
+        
         // POST: /Items/Change
         [HttpPost]
         public IActionResult Change(int id, string name, string description, IFormFile files, float price, int CategoryId)
         {
             Items existingItem = IAllItems.GetItemById(id);
-
+            
             if (existingItem == null)
             {
                 return NotFound();
             }
-
+            
             // Обновляем данные
             existingItem.Name = name;
             existingItem.Description = description;
             existingItem.Price = Convert.ToInt32(price);
             existingItem.Category = new Categories() { Id = CategoryId };
-
+            
             // Обновляем изображение если загружено новое
             if (files != null && files.Length > 0)
             {
@@ -108,22 +108,22 @@ namespace Shop_Markov.Controllers
                         System.IO.File.Delete(oldFilePath);
                     }
                 }
-
+                
                 // Сохраняем новое изображение
                 string fileName = files.FileName;
                 var uploads = Path.Combine(hostingEnvironment.WebRootPath, "img");
                 var filePath = Path.Combine(uploads, fileName);
-
+                
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
                     files.CopyTo(fileStream);
                 }
-
+                
                 existingItem.Img = fileName;
             }
-
+            
             bool result = IAllItems.Change(existingItem);
-
+            
             if (result)
             {
                 return RedirectToAction("List");
@@ -135,32 +135,32 @@ namespace Shop_Markov.Controllers
                 return View(existingItem);
             }
         }
-
+        
         // GET: /Items/Delete
         [HttpGet]
         public IActionResult Delete(int id)
         {
             Items item = IAllItems.GetItemById(id);
-
+            
             if (item == null)
             {
                 return NotFound();
             }
-
+            
             return View(item);
         }
-
+        
         // POST: /Items/Delete
         [HttpPost]
         public IActionResult Delete(int id, string confirm)
         {
             Items item = IAllItems.GetItemById(id);
-
+            
             if (item == null)
             {
                 return NotFound();
             }
-
+            
             // Удаляем изображение
             if (!string.IsNullOrEmpty(item.Img))
             {
@@ -170,9 +170,9 @@ namespace Shop_Markov.Controllers
                     System.IO.File.Delete(filePath);
                 }
             }
-
+            
             bool result = IAllItems.Delete(id);
-
+            
             if (result)
             {
                 return RedirectToAction("List");
@@ -183,7 +183,7 @@ namespace Shop_Markov.Controllers
                 return View(item);
             }
         }
-
+        
         public ViewResult List(int id = 0)
         {
             ViewBag.Title = "Страница с предметами";

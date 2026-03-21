@@ -12,12 +12,10 @@
 		@{
 			foreach (var Category in Model.Categories)
 			{
-				if (Category.Id == Model.SelectCategory)
-				{
+				if (Category.Id == Model.SelectCategory){
 					<option selected="selected" value="@Category.Id">@Category.Name</option>
 				}
-				else
-				{
+				else{
 					<option value="@Category.Id">@Category.Name</option>
 				}
 			}
@@ -25,7 +23,7 @@
 	</select>
 	<script>
 		function SelectCategory (sender) {
-			window.location = "/Items/List?id=" + sender.value
+			window.location = "/Items/List?id=" + sender.value 
 		}
 	</script>
 </div>
@@ -36,8 +34,7 @@
 @{
 	foreach (var item in Model.Items)
 	{
-		if (Model.SelectCategory == 0 || item.Category.Id == Model.SelectCategory)
-		{
+		if (Model.SelectCategory == 0 || item.Category.Id == Model.SelectCategory){
 			<div class="item" style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
 				<img src="@item.Img" style="max-width: 200px;" />
 				<div class="data">

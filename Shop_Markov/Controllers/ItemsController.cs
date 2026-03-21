@@ -15,6 +15,12 @@ namespace Shop_Markov.Controllers
             this.IAllCategories = iAllCategories;
         }
 
+        [HttpGet]
+        public ViewResult Add()
+        {
+            IEnumerable<Categories> Categories = IAllCategories.AllCategories;
+            return View(Categories);
+        }
         public ViewResult List(int id = 0)
         {
             ViewBag.Title = "Страница с предметами";

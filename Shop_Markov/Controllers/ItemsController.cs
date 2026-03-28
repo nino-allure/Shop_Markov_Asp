@@ -192,5 +192,13 @@ namespace Shop_Markov.Controllers
             VMItems.SelectCategory = id;
             return View(VMItems);
         }
+
+        public ActionResult Basket(int idItem = -1)
+        {
+            if (idItem != 1)
+            {
+                StartupBase.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x =>  x.Id == idItem).First()));
+            }
+        }
     }
 }

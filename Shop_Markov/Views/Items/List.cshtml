@@ -5,6 +5,7 @@
 
 @{
 	Layout = "_Layout";
+
 }
 
 <div>
@@ -24,7 +25,7 @@
 	</select>
 	<script>
 		function SelectCategory (sender) {
-			window.location = "/Items/List?id=" + sender.value 
+		window.location = "/Items/List?id=" + sender.value 
 		}
 	</script>
 </div>
@@ -52,7 +53,7 @@
 				</div>
 				<div class="basket">
 					<div class="button" id="@item.Id">
-					В корзину
+						В корзину
 					</div>
 				</div>
 				<div class="count">
@@ -64,3 +65,23 @@
 		}
 	}
 }
+<script>
+	$(".item").children(".basket").children(".button").click(function(){
+		$(this).parent().children(".count").show();
+		$(this).hide();
+		$.ajax({
+			url: '@Url.Action("Basket", "Items")',
+			contentType: "application/json; charset=utf-8",
+			data: { idItem: $(this).attr('id') },
+			dataType: "json",
+			success: SuccessBasket,
+			error: AjaxError
+		});
+	});
+	function SuccesBasket(data) {
+		console.log(data);
+	}
+	function AjaxError() {
+		console.log("Ошибка выполлнения ajax")
+	}
+</script>

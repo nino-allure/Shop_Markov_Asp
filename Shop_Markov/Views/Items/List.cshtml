@@ -50,6 +50,16 @@
 						<a href="/Items/Delete?id=@item.Id" onclick="return confirm('Вы уверены, что хотите удалить этот товар?')">Удалить</a>
 					</div>
 				</div>
+				<div class="basket">
+					<div class="button" id="@item.Id">
+					В корзину
+					</div>
+				</div>
+				<div class="count">
+					<div class="button min">-</div>
+					<div class="text">1</div>
+					<div class="button max">+</div>
+				</div>
 			</div>
 		}
 	}

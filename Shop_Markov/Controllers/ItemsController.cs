@@ -200,5 +200,17 @@ namespace Shop_Markov.Controllers
                 StartupBase.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x =>  x.Id == idItem).First()));
             }
         }
+
+        public ActionResult BasketCount(int idItem = -1, int count = -1)
+        {
+            if (idItem != 1)
+            {
+                if (count == 0)
+                    StartupBase.BasketItem.Remove(StartupBase.BasketItem.Find(x => x.Id == idItem));
+                else
+                    StartupBase.BasketItem.Find(x => x.Id == idItem).Count = count;
+            }
+            return Json(StartupBase.BasketItem);
+        }
     }
 }

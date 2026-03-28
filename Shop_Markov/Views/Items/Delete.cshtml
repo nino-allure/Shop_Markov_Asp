@@ -12,19 +12,15 @@
     <div>Описание: @Model.Description</div>
     <div>Стоимость: @Model.Price</div>
     <div>Категория: @Model.Category.Name</div>
-    @if (!string.IsNullOrEmpty(Model.Img))
-    {
-        <div><img src="/img/@Model.Img" alt="@Model.Name" style="max-width: 200px;" /></div>
-    }
 </div>
 
 <form method="post" asp-action="Delete">
     <input type="hidden" name="id" value="@Model.Id" />
-    <input type="submit" value="Удалить" style="background-color: red; color: white;" />
+    <input type="submit" value="Удалить"/>
     <a href="/Items/List">Отмена</a>
 </form>
 
 @if (ViewBag.Error != null)
 {
-    <div style="color: red; margin-top: 10px;">@ViewBag.Error</div>
+    <div style=margin-top: 10px;">@ViewBag.Error</div>
 }
